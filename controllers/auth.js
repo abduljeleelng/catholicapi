@@ -19,7 +19,6 @@ exports.signin=(req,res)=>{
         if (err || !user){
             return res.status(401).json({error:"email doesn't exist, please SignUp"})
         }
-        //authenticate user password
         if (!user.authenticate(password)){
             return res.status(401).json({error:"email and password not match"})
         }
