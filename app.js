@@ -29,8 +29,6 @@ app.use(cookieParser());
 app.use(expressValidator());
 app.get("/api",(req,res)=>{
    // res.status(200).json({message:"api now working"})
-
-
     fs.readFile("docs/apiDocs.json",(error,data)=>{
         if(error){return res.status(400).json({error:error})}
         res.json(JSON.parse(data));

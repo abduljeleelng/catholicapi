@@ -30,6 +30,9 @@ exports.allUsers=(req,res)=>{
          res.json({user})
     }).select("firstName lastName gender email updated created")
 };
+exports.user=(req,res)=>{
+  return res.json(req.profile)
+};
 exports.getUser=(req,res)=>{
     req.profile.hashed_password = undefined;
     req.profile.salt = undefined;
@@ -175,3 +178,32 @@ exports.findPeople = (req, res) => {
         res.json(users);
     }).select("firstName");
 };
+
+exports.updateAbout=(req,res,next)=>{
+    let user = req.profile;
+    user=_.extend(user,req.body); //extend mutate the source object
+    user.updated= Date.now();
+    user.save((err,user)=>{
+        if (err){return res.status(400).json({error:"unauthorised access"})}
+         user.hashed_password = undefined;
+         user._v = undefined;
+         user.photo=undefined;
+        res.status(200).json({user})
+        next();
+    })
+};
+
+exports.updateStatus=(req,res,next)=>{
+    let user = req.profile;
+    user=_.extend(user,req.body); //extend mutate the source object
+    user.updated= Date.now();
+    user.save((err,user)=>{
+        if (err){return res.status(400).json({error:"unauthorised access"})}
+        user.hashed_password = undefined;
+        user._v = undefined;
+        user.photo=undefined;
+        res.status(200).json({user})
+        next();
+    })
+};
+

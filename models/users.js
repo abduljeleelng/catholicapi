@@ -52,6 +52,26 @@ const userSchma = new mongoose.Schema({
         type: String,
         trim: true
     },
+    occupation:{
+        type: String,
+        trim: true
+    },
+    education:{
+        type: String,
+        trim: true
+    },
+    address:{
+        type: String,
+        trim: true
+    },
+    interest:{
+        type: String,
+        trim: true
+    },
+    status:{
+        type: String,
+        trim: true
+    },
     following: [{ type: ObjectId, ref: "User" }],
     followers: [{ type: ObjectId, ref: "User" }],
     resetPasswordLink: {
