@@ -20,7 +20,7 @@ exports.signup = async (req,res)=>{
         };
         sendEmail(emailData);
         return res.status(200).json({
-            message: `Dear ${user.firstName}, your registration succeful, you can get your mail for more details`
+            messages: `Dear ${user.firstName}, your registration succeful, you can get your mail for more details`
         });
     })
     //await user.save();
