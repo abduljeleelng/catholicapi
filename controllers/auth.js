@@ -11,10 +11,10 @@ exports.signup = async (req,res)=>{
     //const user = new User(req.body);
     await user.save((err,user)=>{
         if(err || !user){return res.status(401).json({error:"registration fail, Please try again"})}
-        //res.json(user);
+        res.json(user);
         const emailData = {
             from: "noreply@imcatholic.org",
-            to: user.email,
+            to: "abduljeleelng@gmail.com",
             subject: "Welcome to The word of Christ, I am Catholic",
             html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
