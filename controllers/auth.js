@@ -11,7 +11,7 @@ exports.signup = async (req,res)=>{
     //const user = new User(req.body);
     await user.save((err,user)=>{
         if(err || !user){return res.status(401).json({error:"registration fail, Please try again"})}
-        res.json(user);
+        //res.json(user);
         const emailData = {
             from: "noreply@imcatholic.org",
             to: "abduljeleelng@gmail.com",
