@@ -6,7 +6,7 @@ const {sendEmail} = require('../helpers');
 
 exports.signup = async (req,res)=>{
     const userExist = await  User.findOne({email:req.body.email});
-    if (userExist) return res.status(400).json({error:"user already exist"});
+    if (userExist) return res.status(400).json({errors:"user already exist"});
     const user = await new User (req.body);
     //const user = new User(req.body);
     await user.save((err,user)=>{
