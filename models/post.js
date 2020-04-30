@@ -3,7 +3,6 @@ const {ObjectId}= mongoose.Schema;
 const postSchma = new mongoose.Schema({
     title: {
         type: String,
-        required: true
     },
     body: {
         type: String,

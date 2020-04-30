@@ -5,7 +5,7 @@ const _ = require('lodash');
 exports.postById=(req, res, next, id)=>{
     Post.findById(id)
         .populate("PostById","_id firstName lastName email ")
-        //.populate("comments.postedBy", "_id firstName lastName email ")
+        .populate("comments.postedBy", "_id firstName lastName email ")
         //.select("_id title body created likes")
         .exec((err, post)=>{
             if (err || !post){
@@ -18,6 +18,7 @@ exports.postById=(req, res, next, id)=>{
 exports.getPost =(req, res)=>{
         const posts = Post.find().sort( { created: -1 } )
             .populate("postedBy","_id firstName lastName email")
+            .populate("comments.postedBy", "_id created firstName lastName email")
             .select("_id title body created postedBy comments likes")
             .then((posts)=>{res.status(200).json(posts)})
             .catch(err=>console.log(err))

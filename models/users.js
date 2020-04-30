@@ -19,6 +19,21 @@ const userSchma = new mongoose.Schema({
         trim:true,
         require:true,
     },
+    day:{
+        type:String,
+        trim:true,
+        require:true,
+    },
+    month:{
+        type:String,
+        trim:true,
+        require:true,
+    },
+    year:{
+        type:String,
+        trim:true,
+        require:true,
+    },
     age:{
         type:String,
         trim:true,

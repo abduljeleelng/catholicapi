@@ -581,8 +581,8 @@ exports.signin=(req,res)=>{
         //set token to the cookies
         res.cookie("t",token,{expre:new Date()+60})
         //send token and user details to the clint
-        const {_id,email,name}= user;
-        return res.status(200).json({token,user:{_id,name,email}})
+        const {_id,email,firstName, lastName,city, country}= user;
+        return res.status(200).json({token,user:{_id,email,firstName,lastName,city,country}})
     })
 };
 

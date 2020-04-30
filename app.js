@@ -15,6 +15,8 @@ dotenv.config();
 const postRouter = require('./routes/post');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
+const statusRouter = require('./routes/status');
+const birthdayRouter = require('./routes/birthday');
 
 mongoose
     .connect(process.env.MONGODB_URI, {useUnifiedTopology:true,useNewUrlParser:true,keepAlive:true,poolSize:30,socketTimeoutMS:360000*3600,connectTimeoutMS:36000*678 })
@@ -35,14 +37,16 @@ app.get("/api",(req,res)=>{
     })
     
 });
-app.use('/api',postRouter);
-app.use('/api',authRouter);
-app.use('/api',userRouter);
+app.use('/api', postRouter);
+app.use('/api', authRouter);
+app.use('/api', userRouter);
+app.use('/api', statusRouter);
+app.use('/api', birthdayRouter);
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).json({error:'invalid token...'});
     }
-    next()
+    next();
 });
 
 const port = process.env.PORT || 8080;
