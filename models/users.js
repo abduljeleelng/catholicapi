@@ -89,6 +89,7 @@ const userSchma = new mongoose.Schema({
     },
     following: [{ type: ObjectId, ref: "User" }],
     followers: [{ type: ObjectId, ref: "User" }],
+    friends: [{ type: ObjectId, ref: "User" }],
     resetPasswordLink: {
         data: String,
         default: ""
