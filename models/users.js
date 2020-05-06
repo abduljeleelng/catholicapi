@@ -4,6 +4,10 @@ const crypto = require('crypto');
 const { ObjectId } = mongoose.Schema;
 
 const userSchma = new mongoose.Schema({
+    username:{
+        type:String,
+        trim:true,
+    },
     firstName:{
         type:String,
         trim:true,
@@ -48,6 +52,7 @@ const userSchma = new mongoose.Schema({
         type:String,
         trim:true,
         require:true,
+        lowercase: true
     },
     hashed_password:{
         type:String,

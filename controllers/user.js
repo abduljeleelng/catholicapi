@@ -9,6 +9,7 @@ exports.userById =(req,res,next,id)=> {
         // populate followers and following users array
         .populate("following", "_id firstName lastName gender")
         .populate("followers", "_id firstName lastName gender")
+        .populate("friends", "_id firstName lastName gender")
         .exec((err, user) => {
             if (err || !user) {
                 return res.status(400).json({error: "user not found"})
@@ -26,7 +27,7 @@ exports.hasAutorization=(req,res,next)=>{
 };
 exports.allUsers=(req,res)=>{
     User.find((err, user)=>{
-        if (err){return res.status(400).json({error:err})}
+        if (err || !user){return res.status(400).json({error:err})}
          res.json({user})
     }).select("firstName lastName gender email updated created")
 };
@@ -50,14 +51,11 @@ exports.updateUser=(req,res)=>{
     })
     */
    let form = new formidable.IncomingForm();
-    // console.log("incoming form data: ", form);
     form.keepExtensions = true;
+    ///console.log("incoming form data: ", form);
     form.parse(req, (err, fields, files) => {
-        if (err) {
-            return res.status(400).json({
-                error: "Photo could not be uploaded"
-            });
-        }
+        console.log(files);
+        if (err) {return res.status(400).json({err,error: "Photo could not be uploaded"});}
         // save user
         let user = req.profile;
         // console.log("user in update: ", user);
@@ -70,15 +68,15 @@ exports.updateUser=(req,res)=>{
             user.photo.data = fs.readFileSync(files.photo.path);
             user.photo.contentType = files.photo.type;
         }
+        if (files.cover) {
+            user.cover.data = fs.readFileSync(files.cover.path);
+            user.cover.contentType = files.cover.type;
+        }
         user.save((err, result) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
-                });
-            }
+            if (err) {return res.status(400).json({  error: err });}
             user.hashed_password = undefined;
             user.salt = undefined;
-            // console.log("user after update with formdata: ", user);
+            console.log("user after update with formdata: ", user);
             res.json(user);
         });
     });

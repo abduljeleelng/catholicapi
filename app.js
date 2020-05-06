@@ -17,6 +17,7 @@ const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const statusRouter = require('./routes/status');
 const birthdayRouter = require('./routes/birthday');
+const aboutRouter = require('./routes/about');
 
 mongoose
     .connect(process.env.MONGODB_URI, {useUnifiedTopology:true,useNewUrlParser:true,keepAlive:true,poolSize:30,socketTimeoutMS:360000*3600,connectTimeoutMS:36000*678 })
@@ -42,6 +43,7 @@ app.use('/api', authRouter);
 app.use('/api', userRouter);
 app.use('/api', statusRouter);
 app.use('/api', birthdayRouter);
+app.use('/api', aboutRouter);
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).json({error:'invalid token...'});

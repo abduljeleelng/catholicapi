@@ -31,7 +31,7 @@ exports.statusBy=(req,res)=>{
     Status.find({statusBy:req.body})
     .sort({created:-1})
     .populate("statusBy","_id firstName lastName email")
-    .select("_id status created statusdBy ")
+    .select("_id status created statusBy ")
     .then((err,result)=>{
         if(err || !result) return res.status(400).json(err)
         res.status(200).json(result)

@@ -13,9 +13,9 @@ exports.bday=(req,res)=>{
         if(err || ! resul) return res.status(400).json(err)
         res.status(200).json(resul)
     })
-}
+},
 exports.bmonth=(req,res)=>{
-    User.find({month})
+    User.find({month,"day":{$gt:day},})
     .sort({day:-1,firstName:-1,lastName:-1})
     .select("_id firstName lastName city country")
     .then((err,resul)=>{
