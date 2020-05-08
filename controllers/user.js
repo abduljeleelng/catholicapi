@@ -54,7 +54,7 @@ exports.updateUser=(req,res)=>{
     form.keepExtensions = true;
     ///console.log("incoming form data: ", form);
     form.parse(req, (err, fields, files) => {
-        console.log(files);
+        console.log(JSON.stringify(files));
         if (err) {return res.status(400).json({err,error: "Photo could not be uploaded"});}
         // save user
         let user = req.profile;
@@ -68,6 +68,7 @@ exports.updateUser=(req,res)=>{
             user.photo.data = fs.readFileSync(files.photo.path);
             user.photo.contentType = files.photo.type;
         }
+        
         if (files.cover) {
             user.cover.data = fs.readFileSync(files.cover.path);
             user.cover.contentType = files.cover.type;
@@ -77,7 +78,7 @@ exports.updateUser=(req,res)=>{
             user.hashed_password = undefined;
             user.salt = undefined;
             console.log("user after update with formdata: ", user);
-            res.json(user);
+            res.json({message:"your data successfully uploaded"});
         });
     });
 };

@@ -68,6 +68,10 @@ const userSchma = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
+    cover: {
+        data: Buffer,
+        contentType: String
+    },
     about: {
         type: String,
         trim: true
