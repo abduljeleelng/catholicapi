@@ -41,12 +41,10 @@ const userSchma = new mongoose.Schema({
     age:{
         type:String,
         trim:true,
-        require:true,
     },
     country:{
         type:String,
         trim:true,
-        require:true,
     },
     email:{
         type:String,
@@ -71,6 +69,10 @@ const userSchma = new mongoose.Schema({
     cover: {
         data: Buffer,
         contentType: String
+    },
+    activationCode: {
+        type: String,
+        trim: true
     },
     about: {
         type: String,

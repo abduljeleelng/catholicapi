@@ -13,12 +13,12 @@ exports.createPostValidator =(req,res,next)=>{
 };
 exports.createUserValidator =(req,res,next)=>{
     req.check('firstName',"First Name is required").notEmpty();
-    req.check('lastName',"Last Name is required").notEmpty();
-    req.check('country',"Country is required").notEmpty();
-    req.check('age',"age is required").notEmpty();
+    req.check('lastName',"Surname is required").notEmpty();
+    //req.check('country',"Country is required").notEmpty();
+    //req.check('age',"age is required").notEmpty();
     req.check('day',"Birth day is required").notEmpty();
     req.check('month',"Birth month is required").notEmpty();
-    req.check('city',"city is required").notEmpty();
+    //req.check('city',"city is required").notEmpty();
     req.check('gender',"genender is required").notEmpty();
     req.check('email','email required ').notEmpty();
     req.check('email','email must be between 5 to 200 ')
