@@ -74,6 +74,10 @@ const userSchma = new mongoose.Schema({
         type: String,
         trim: true
     },
+    activated: {
+        type: Boolean,
+        trim: true
+    },
     about: {
         type: String,
         trim: true
