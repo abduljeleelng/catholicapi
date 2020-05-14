@@ -900,7 +900,6 @@ exports.forgotPassword = (req, res) => {
     //console.log("signin req.body", email);
     // find the user based on email
     User.findOne({email}, (err, user) => {
-        //console.log(JSON.stringify(user))
         // if err or no user
         if (err || !user) return res.status("401").json({error: "User with that email does not exist!, you can signup for a new account"});
         // generate a token with user id and secret
@@ -908,7 +907,6 @@ exports.forgotPassword = (req, res) => {
             { _id: user._id, iss: "NODEAPI" },
             process.env.JWT_SECRET
         );
-
         // email data
         const emailData = {
             from: "noreply@imcatholic.org",
@@ -1094,7 +1092,7 @@ exports.forgotPassword = (req, res) => {
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                                      <a href=https://socail-media.abduljeleelng.now.sh/user/reset-password/${token} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Reset Password</a>
+                                      <a href=https://social-app-theta.now.sh/user/reset-password/${token} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Reset Password</a>
                                     </td>
                                   </tr>
                                 </table>
@@ -1109,7 +1107,7 @@ exports.forgotPassword = (req, res) => {
                       <tr>
                         <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                           <p style="margin: 0;">If that doesn't work, copy and paste the following link in your browser:</p>
-                          <p style="margin: 0;"><a href=https://socail-media.abduljeleelng.now.sh/user/reset-password/${token} target="_blank">https://socail-media.abduljeleelng.now.sh/user/reset-password/${token}</a></p>
+                          <p style="margin: 0;"><a href=https://social-app-theta.now.sh/user/reset-password/${token} target="_blank">https://social-app-theta.now.sh/user/reset-password/${token}</a></p>
                         </td>
                       </tr>
                       <!-- end copy -->
@@ -1180,7 +1178,7 @@ exports.forgotPassword = (req, res) => {
             } else {
                 sendEmail(emailData);
                 return res.status(200).json({
-                    message: `Email has been sent to ${email}. Follow the instructions to reset your password.`
+                    message: `Dear ${user.firstName}, Email has been sent to ${email}. Follow the instructions to reset your password.`
                 });
             }
         });
