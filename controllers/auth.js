@@ -1204,7 +1204,6 @@ exports.resetPassword = (req, res) => {
 
         user = _.extend(user, updatedFields);
         user.updated = Date.now();
-
         user.save((err, result) => {
             console.log(JSON.stringify(result));
             if (err) {
@@ -1213,7 +1212,7 @@ exports.resetPassword = (req, res) => {
                 });
             }
             res.json({
-                message: `Great! Now you can login with your new password.`
+                message: `Great! ${result.firstName}, your password successsfully reset \n Now you can login with your new password.`
             });
         });
     });
