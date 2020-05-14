@@ -165,7 +165,7 @@ exports.signup = async (req,res)=>{
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                       <tr>
                         <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-                          <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Reset Your Password</h1>
+                          <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Activate your Account</h1>
                         </td>
                       </tr>
                     </table>
@@ -191,7 +191,8 @@ exports.signup = async (req,res)=>{
                       <!-- start copy -->
                       <tr>
                         <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                          <p style="margin: 0;">Tap the button below to reset your account password. If you didn't request a new password, you can safely delete this email.</p>
+                          <p style="margin: 0;">your activation code is ${user.activationCode} </p>
+                          <p style="margin: 0;"> Or Tap the button below to activate your account. </p>
                         </td>
                       </tr>
                       <!-- end copy -->
@@ -205,7 +206,7 @@ exports.signup = async (req,res)=>{
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                                      <a href=https://socail-media.abduljeleelng.now.sh/user/acoount-activation/${user.activationCode} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Activate your acoount</a>
+                                      <a href=https://social-app-theta.now.sh/user/acoount-activation/${user.activationCode} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Activate your acoount</a>
                                     </td>
                                   </tr>
                                 </table>
@@ -220,7 +221,7 @@ exports.signup = async (req,res)=>{
                       <tr>
                         <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                           <p style="margin: 0;">If that doesn't work, copy and paste the following link in your browser:</p>
-                          <p style="margin: 0;"><a href=https://socail-media.abduljeleelng.now.sh/user/reset-password/${user.activationCode} target="_blank">https://socail-media.abduljeleelng.now.sh/user/reset-password/${user.activationCode}</a></p>
+                          <p style="margin: 0;"><a href=https://social-app-theta.now.sh/user/acoount-activation/${user.activationCode} target="_blank">https://social-app-theta.now.sh/user/acoount-activation/${user.activationCode}</a></p>
                         </td>
                       </tr>
                       <!-- end copy -->
@@ -294,15 +295,18 @@ exports.signup = async (req,res)=>{
     //res.status(200).json({messages:'account successfully created'});
 };
 
-exports.activate = (req, res)=>{
+exports.activation=(req,res)=>{
+  //return res.status(400).json({ error: "Please, enter activation code" });
   if (!req.body) return res.status(400).json({ error: "Please, enter activation code" });
+  const {activationCode}=req.body;
+  console.log(activationCode)
   User.findOne({activationCode}, (err, user)=>{
     if(err || !user) return res.status(400).json({ error: "invalid activation code !! \n Please conatct support team if your account not yet activated" });
     const updatedFields = {activationCode:'', activated:true};
     user = _.extend(user, updatedFields);
     user.updated = Date.now();
     user.save((err, user) => {
-      console.log(JSON.stringify(users));
+      console.log(JSON.stringify(user));
       if (err || !user) return res.status(400).json({error: err});
       const emailData = {
           from: "noreply@imcatholic.org",
@@ -852,7 +856,7 @@ exports.activate = (req, res)=>{
       });
     });
   })
-}
+};
 
 exports.signin=(req,res)=>{
     //find the user by mail
