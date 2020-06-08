@@ -29,7 +29,7 @@ const statusSchema = new mongoose.Schema({
     created:{
         type: Date,
         default: Date.now(),
-        createIndexes: { expires: '30m' },
+       // createIndexes: { expires: '30m' },
     },
 });
 
