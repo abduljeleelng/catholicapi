@@ -15,7 +15,7 @@ router.get('/events/by/:userId', eventByUser);
 //router.get('/post/by/:userId',requireSign,postsByUser);
 
 //post photo 
-//router.get('/posts/photo/:postId',postPhoto);
+router.get('/events/photo/:eventId',postPhoto);
 
 //route for creating new post
 router.post('/events/new/:userId',createEvent,requireSign,);
