@@ -3,7 +3,7 @@ const now = new Date();
 const day = now.getDate();     
 const month = now.getMonth() + 1;
 
-console.log(JSON.stringify({now,day,month}));
+//console.log(JSON.stringify({now,day,month}));
 
 exports.bday=(req,res)=>{
     User.find({day:day,month:month})
