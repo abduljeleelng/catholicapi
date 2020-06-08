@@ -15,8 +15,8 @@ exports.eventById=(req, res, next, id)=>{
         })
 };
 
-exports.postPhoto = (req,res,next)=>{
-    res.set("Content-Type", req.post.photo.contentType);
+exports.eventPhoto = (req,res,next)=>{
+    res.set("Content-Type", req.event.photo.contentType);
     return res.send(req.event.photo.data);
 };
 

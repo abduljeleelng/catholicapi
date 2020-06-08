@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {events,createEvent,eventById,eventByUser} = require('../controllers/event');
+const {events,createEvent,eventById,eventByUser,eventPhoto} = require('../controllers/event');
 const {requireSign} = require('../controllers/auth');
 const {userById} = require('../controllers/user');
 //const {createPostValidator} = require('../validator');
@@ -15,7 +15,7 @@ router.get('/events/by/:userId', eventByUser);
 //router.get('/post/by/:userId',requireSign,postsByUser);
 
 //post photo 
-router.get('/events/photo/:eventId',postPhoto);
+router.get('/events/photo/:eventId',eventPhoto);
 
 //route for creating new post
 router.post('/events/new/:userId',createEvent,requireSign,);
