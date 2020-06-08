@@ -27,7 +27,7 @@ exports.getStatus =(req,res)=>{
 };
 
 exports.statusBy=(req,res)=>{
-    console.log(JSON.stringify(req.body));
+    //console.log(JSON.stringify(req.body));
     Status.find({statusBy:req.body})
     .sort({created:-1})
     .populate("statusBy","_id firstName lastName email")
