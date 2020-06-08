@@ -21,7 +21,7 @@ exports.postPhoto = (req,res,next)=>{
 };
 
 exports.events =(req, res)=>{
-    Post.find().sort( { created: -1 } )
+    Event.find().sort( { created: -1 } )
     .populate("eventBy","_id firstName lastName email")
     .select("_id title created eventBy")
     .then((events)=>{
@@ -31,7 +31,7 @@ exports.events =(req, res)=>{
 };
 
 exports.eventByUser=(req,res)=>{
-    Event.find({eventBy:req.event._id})
+    Event.find({eventBy:req.profile._id})
         .populate("eventBy","_id firstName lastName")
         .sort({created:-1})
         .exec((err,posts)=>{
@@ -41,6 +41,14 @@ exports.eventByUser=(req,res)=>{
 };
 
 exports.createEvent = (req,res,next)=>{
+    const event = new Event(req.body);
+    event.eventBy = req.profile;
+    event.save((err,event)=>{
+        if(err || !event) return res.status(400).json({error:err});
+        return res.status(200).json({event})
+    });
+
+    /*
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
     form.parse(req,(err,fields, files)=>{
@@ -60,6 +68,7 @@ exports.createEvent = (req,res,next)=>{
             res.status(200).json({result})
         })
     });
+    */
 };
 
 
