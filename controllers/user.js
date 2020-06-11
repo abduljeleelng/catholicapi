@@ -9,7 +9,7 @@ exports.userById =(req,res,next,id)=> {
         // populate followers and following users array
         .populate("following", "_id firstName lastName gender email")
         .populate("followers", "_id firstName lastName gender email")
-        .populate("friends", "_id firstName lastName gender email")
+        //.populate("friends", "_id firstName lastName gender email")
         .exec((err, user) => {
             if (err || !user) {
                 return res.status(400).json({error: "user not found"})
@@ -30,7 +30,7 @@ exports.allUsers=(req,res)=>{
     User.find((err, user)=>{
         if (err || !user){return res.status(400).json({error:err})}
          res.json({user})
-    }).select("firstName lastName gender email updated created")
+    }).select("firstName lastName gender email updated created friends followers following")
 };
 exports.user=(req,res)=>{
   return res.json(req.profile)
