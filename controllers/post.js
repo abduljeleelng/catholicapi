@@ -29,8 +29,29 @@ exports.postPhoto = (req,res,next)=>{
     return res.send(req.post.photo.data);
 };
 
+exports.photosList = (req, res,next)=>{
+    Post.find({postedBy:req.profile._id})
+    //.populate("postedBy","_id firstName lastName")
+    .select("_id title body created postedBy comments likes,photo")
+    .sort({created:-1})
+    .exec((err,posts)=>{
+        if (err){return res.status(400).json({err})}
+        res.send({posts})
+    })
+    //res.set("Content-Type",photo.contentType)
+    //Post.find({"postedBy":"5ebdbf93e058480878630437"})
+    //.select("_id title body created postedBy comments likes,photo")
+    //.then((photo)=>{
+    //    res.send(photo)
+    //})
+    //.catch(error=>console.log(error))
+};
+
+
+
+
 exports.singlePost =(req,res)=>{
-    const post=Post.findById(req.post)
+    Post.findById(req.post)
     .sort( { created: -1 } )
     .populate("postedBy","_id firstName lastName email")
     .populate("comments.postedBy", "_id created firstName lastName email ")
@@ -38,8 +59,6 @@ exports.singlePost =(req,res)=>{
     .then((post)=>{res.status(200).json(post)})
     .catch(error=>console.log(error));
 }
-
-
 
 exports.singlePostA = (req, res) => {
    return res.json(req.post);
