@@ -32,7 +32,7 @@ exports.postPhoto = (req,res,next)=>{
 exports.photosList = (req, res,next)=>{
     Post.find({postedBy:req.profile._id})
     //.populate("postedBy","_id firstName lastName")
-    .select("_id title body created postedBy comments likes,photo")
+    .select("_id body photo")
     .sort({created:-1})
     .exec((err,posts)=>{
         if (err){return res.status(400).json({err})}
