@@ -38,7 +38,7 @@ exports.photosList = (req, res,next)=>{
     .exec((err,posts)=>{
         console.log(JSON.stringify(posts));
         if (err){return res.status(400).json({err})}
-        res.set("Content-Type",posts.contentType)
+        //res.set("Content-Type",posts.contentType)
         res.send(posts)
     })
     //res.set("Content-Type",photo.contentType)
