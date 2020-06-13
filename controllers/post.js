@@ -30,13 +30,16 @@ exports.postPhoto = (req,res,next)=>{
 };
 
 exports.photosList = (req, res,next)=>{
+    
     Post.find({postedBy:req.profile._id})
     //.populate("postedBy","_id firstName lastName")
-    .select("_id body photo")
+    .select("photo")
     .sort({created:-1})
     .exec((err,posts)=>{
+        console.log(JSON.stringify(posts));
         if (err){return res.status(400).json({err})}
-        res.send({posts})
+        res.set("Content-Type",posts.contentType)
+        res.send(posts)
     })
     //res.set("Content-Type",photo.contentType)
     //Post.find({"postedBy":"5ebdbf93e058480878630437"})
