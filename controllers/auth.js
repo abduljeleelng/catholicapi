@@ -1205,7 +1205,7 @@ exports.resetPassword = (req, res) => {
         user = _.extend(user, updatedFields);
         user.updated = Date.now();
         user.save((err, result) => {
-            console.log(JSON.stringify(result));
+            //console.log(JSON.stringify(result));
             if (err) {
                 return res.status(400).json({
                     error: err
