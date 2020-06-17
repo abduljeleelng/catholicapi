@@ -864,7 +864,7 @@ exports.signin=(req,res)=>{
     User.findOne({email},(err,user)=>{
         if (err || !user){return res.status(401).json({error:"email doesn't exist, please SignUp"})}
         if (user.activated !== true){
-          return res.status(401).json({error:"your account is not yet activated,\n please check your mail and activate \n if you needs support contact support@iamcatholic.net"})
+          return res.status(401).json({error:"your account is not yet activated,\n please check your mail and activate \n if you needs support contact support@iamcatholic.org"})
         }
         if (!user.authenticate(password)){
             return res.status(401).json({error:"email and password not match"})
@@ -1092,7 +1092,7 @@ exports.forgotPassword = (req, res) => {
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tr>
                                     <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                                      <a href=https://social-app-theta.now.sh/user/reset-password/${token} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Reset Password</a>
+                                      <a href=https://www.iamacatholic.org/user/reset-password/${token} target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Reset Password</a>
                                     </td>
                                   </tr>
                                 </table>
