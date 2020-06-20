@@ -36,7 +36,7 @@ exports.photosList = (req, res,next)=>{
     .select("_id")
     .sort({created:-1})
     .exec((err,posts)=>{
-        console.log(JSON.stringify(posts));
+        //console.log(JSON.stringify(posts));
         if (err){return res.status(400).json({err})}
         //res.set("Content-Type",posts.contentType)
         res.send(posts)
