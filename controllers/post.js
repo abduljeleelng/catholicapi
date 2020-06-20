@@ -33,7 +33,7 @@ exports.photosList = (req, res,next)=>{
     
     Post.find({postedBy:req.profile._id})
     //.populate("postedBy","_id firstName lastName")
-    .select("photo")
+    .select("_id")
     .sort({created:-1})
     .exec((err,posts)=>{
         console.log(JSON.stringify(posts));
